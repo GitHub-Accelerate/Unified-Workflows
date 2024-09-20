@@ -1,0 +1,53 @@
+name: Son workflow
+
+on:
+  workflow_call:
+    inputs: 
+      createRelease:
+        description: 'Create a release'
+        required: false
+        type: boolean
+      deployEnv:
+        description: 'Deployment environment'
+        required: false
+        default: 'dev'
+        type: string
+      deployVersion:
+        description: 'Deployment version'
+        type: string
+        required: false
+
+
+jobs:
+  findlang:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Find programming language
+        run: |
+          echo "We found Java"
+          echo "PROGLANGUAGE=java" >> $GITHUB_ENV
+
+  langisgo:
+    name: Kid workflow for GO
+    if: ${{ env.PROGLANGUAGE == 'go' }}
+    uses: GitHub-Accelerate/Unified-Workflows/.github/workflows/kid.yml@main
+    with:
+      programminglanguage: "go"
+    secrets: inherit
+
+
+  langisjava:
+    name: Kid workflow for Java
+    if: ${{ env.PROGLANGUAGE == 'java' }}
+    uses: GitHub-Accelerate/Unified-Workflows/.github/workflows/kid.yml@main
+    with:
+      programminglanguage: "java"
+    secrets: inherit
+
+  langispython:
+    name: Kid workflow for Python
+    if: ${{ env.PROGLANGUAGE == 'python' }}
+    uses: GitHub-Accelerate/Unified-Workflows/.github/workflows/kid.yml@main
+    with:
+      programminglanguage: "python"
+    secrets: inherit

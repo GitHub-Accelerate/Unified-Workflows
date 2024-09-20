@@ -1,0 +1,23 @@
+name: Kid workflow
+
+on:
+  workflow_call:
+    inputs: 
+      programminglanguage:
+        description: 'Programming Language'
+        required: false
+        type: boolean
+
+
+
+jobs:
+  findlang:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Display programming language
+        env: 
+          PROGLANGUAGE: ${{ inputs.programminglanguage }}
+        run: |
+          echo "What programming language are we using?"
+          echo "$PROGLANGUAGE"
+

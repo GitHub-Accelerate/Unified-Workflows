@@ -1,0 +1,32 @@
+name: Grandpa workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      createRelease:
+        description: 'Create a release'
+        required: false
+        type: boolean
+      deployEnv:
+        description: 'Deployment environment'
+        required: false
+        default: 'dev'
+        type: choice
+        options:
+        - dev
+        - qa
+        - prod
+      deployVersion:
+        description: 'Deployment version'
+        type: string
+        required: false
+
+jobs:
+  sonworkflow:
+    name: Son Workflow
+    uses: GitHub-Accelerate/Unified-Workflows/.github/workflows/son.yml@main
+    with:
+      createRelease: ${{ inputs.createRelease }}
+      deployEnv: ${{ inputs.deployEnv }}
+      deployVersion: ${{ inputs.deployVersion }}
+    secrets: inherit
