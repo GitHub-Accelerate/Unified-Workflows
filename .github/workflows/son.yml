@@ -27,27 +27,28 @@ jobs:
           echo "We found Java"
           echo "PROGLANGUAGE=java" >> $GITHUB_ENV
 
-  langisgo:
-    name: Kid workflow for GO
-    if: ${{ env.PROGLANGUAGE == 'go' }}
-    uses: GitHub-Accelerate/Unified-Workflows/.github/workflows/kid.yml@main
-    with:
-      programminglanguage: "go"
-    secrets: inherit
+      - name: Rending back value
+        env: 
+          PROGLANGUAGE: ${{ env.PROGLANGUAGE }}
+        run: |
+          echo "What programming language workflow will we calling?"
+          echo "$PROGLANGUAGE"
+
+      - name: Kid workflow for Go
+        if: ${{ env.PROGLANGUAGE == 'go' }}
+        uses: GitHub-Accelerate/Unified-Workflows/.github/workflows/kid.yml@main
+        with:
+          programminglanguage: "go"
 
 
-  langisjava:
-    name: Kid workflow for Java
-    if: ${{ env.PROGLANGUAGE == 'java' }}
-    uses: GitHub-Accelerate/Unified-Workflows/.github/workflows/kid.yml@main
-    with:
-      programminglanguage: "java"
-    secrets: inherit
+      - name: Kid workflow for Java
+        if: ${{ env.PROGLANGUAGE == 'java' }}
+        uses: GitHub-Accelerate/Unified-Workflows/.github/workflows/kid.yml@main
+        with:
+          programminglanguage: "java"
 
-  langispython:
-    name: Kid workflow for Python
-    if: ${{ env.PROGLANGUAGE == 'python' }}
-    uses: GitHub-Accelerate/Unified-Workflows/.github/workflows/kid.yml@main
-    with:
-      programminglanguage: "python"
-    secrets: inherit
+      - name: Kid workflow for Python
+        if: ${{ env.PROGLANGUAGE == 'python' }}
+        uses: GitHub-Accelerate/Unified-Workflows/.github/workflows/kid.yml@main
+        with:
+          programminglanguage: "python"
